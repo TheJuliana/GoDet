@@ -3,38 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <title>Matrix 2x2</title>
+    <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-    <header>
-        <h1>Determinant of matrix 2x2</h1>
-    </header>
-    <main>
+    <div class="main">
 
-        <form method="post" data-ajax="false">
-            <mtable>
-            <mtr>
-                <mtd>
-                <input id="a11" type="number" name="a11"/>
-                </mtd>
-                <mtd>
-                <input id="a12" type="number" name="a12"/>
-                </mtd>
-            </mtr>
-            <mtr>
-                <mtd>
-                    <input id="a21" type="number" name="a21"/>
-                </mtd>
-                <mtd>
-                    <input id="a22" type="number" name="a22"/>
-                </mtd>
-            </mtr>
-            </mtable>
-            <p>
-                <input type="submit" value="Calculate"/>
-            </p>
-        </form>
+        <div>
+            <header class="head">
+                <h1 class="main_header">Determinant of matrix 2x2</h1>
+            </header>
+        </div>
 
-    </main>
-    <footer></footer>
+        <div>
+            <main>
+            <form id="mat" action="/" method="post">
+                <mtable class="table" frame="solid">
+                    <div id="col1" class="columns">
+                        <mtr>
+                            <mtd>
+                            <input class="mat_elems" id="a11" type="number" name="a11" min="0" max="100" required />
+                            </mtd>
+                            <mtd>
+                            <input class="mat_elems" id="a12" type="number" name="a12" min="0" max="100" required/>
+                            </mtd>
+                        </mtr>
+                    </div>
+                    <div id="col2" class="columns">
+                        <mtr>
+                            <mtd>
+                                <input class="mat_elems" id="a21" type="number" name="a21" min="0" max="100" required/>
+                            </mtd>
+                            <mtd>
+                                <input class="mat_elems" id="a22" type="number" name="a22" min="0" max="100" required/>
+                            </mtd>
+                        </mtr>
+                    </div>
+                </mtable>
+                <p><input id="calc"  type="submit" value="Calculate"/></p>
+            </form>
+
+            {{ if .Done }}
+            <h2>Determinant = </h2>
+            <h3 id="det1">{{.Determinant}}</h3>
+            {{ else }}
+            <h2 id="det">Here you will se determinant</h2>
+            {{end}}
+
+            </main>
+        </div>
+
+        <div><footer></footer></div>
+    </div>
 </body>
 </html>

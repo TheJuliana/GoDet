@@ -1,0 +1,32 @@
+html {
+    background-color: black;
+    color: white;
+}
+
+.main_header {
+
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+}
+
+.table {
+    border: white;
+    border-radius: 10px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /*убираем стрелочки*/
+    -webkit-appearance: none;
+
+}
+.mat_elems {
+
+}
+

@@ -52,6 +52,11 @@ type Matrix struct {
 	a22 int32
 }
 
+type Page struct {
+	Determinant uintptr
+	Done        bool
+}
+
 func matrixHandler2(w http.ResponseWriter, r *http.Request) {
 	tmpl, _ := template.ParseFiles("matrix2_page.html")
 	if r.Method != http.MethodPost {
@@ -76,6 +81,8 @@ func matrixHandler2(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(mat)
 	var numbers = [4]int32{mat.a11, mat.a12, mat.a21, mat.a22}
 	ret, _, err := det.Call(uintptr(unsafe.Pointer(&numbers)), 4)
+	d := Page{ret, true}
+	tmpl.Execute(w, d)
 	if err != nil {
 		fmt.Println("DETERMINANT= ", ret)
 	}
@@ -109,8 +116,9 @@ func matrixHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
 	http.HandleFunc("/", matrixHandler2)
-	http.HandleFunc("/matrix", getDet)
+	//http.HandleFunc("/matrix", getDet)
 	http.HandleFunc("/about", aboutHandler)
 	http.HandleFunc("/main", mainHandler)
 	http.HandleFunc("/info", infoHandler)
