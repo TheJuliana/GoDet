@@ -6,90 +6,56 @@
     <link rel="stylesheet" href="../assets/matrix_styles.css">
 </head>
 <body>
-    <div class="main">
+    <main>
+        <h1>Determinant of matrix 2x2</h1>
+        <a  href="http://localhost:8080"><input class="buttons" type="button" value="Back"></a>
+        <h2>Enter your matrix:</h2>
+        <form id="mat" action="/matrix2" method="post">
+            <mtable  frame="solid">
+                <mtr>
+                    <mtd>
+                        <input class="mat_elems" id="a11" type="number" name="a11" min="0" max="100" required />
+                    </mtd>
 
-        <div>
-            <header class="head">
-                <h1 class="main_header">Determinant of matrix 2x2</h1>
-            </header>
-        </div>
+                    <mtd>
+                        <input class="mat_elems" id="a12" type="number" name="a12" min="0" max="100" required/>
+                    </mtd>
+                </mtr>
 
-        <div>
-            <main>
-                <div>
-                    <a href="http://localhost:8080"><input type="button" value="Back"></a>
-                </div>
-                <form id="mat" action="/matrix2" method="post">
-                    <div id="form_container">
-                        <div>
-                            <mtable class="table" frame="solid">
-                                <mtr class="rows">
-                                    <div class="row">
-                                        <mtd>
-                                            <p><input class="mat_elems" id="a11" type="number" name="a11" min="0" max="100" required /></p>
-                                        </mtd>
+                <mtr>
+                    <mtd>
+                        <input class="mat_elems" id="a21" type="number" name="a21" min="0" max="100" required/>
+                    </mtd>
 
-                                        <mtd>
-                                            <p><input class="mat_elems" id="a12" type="number" name="a12" min="0" max="100" required/></p>
-                                        </mtd>
-                                    </div>
-                                </mtr>
+                    <mtd>
+                        <input class="mat_elems" id="a22" type="number" name="a22" min="0" max="100" required/>
+                    </mtd>
+                </mtr>
+            </mtable>
+            <input class="buttons" type="submit" value="Calculate"/>
+        </form>
 
-                                <mtr class="rows">
-                                    <div class="row">
-                                        <mtd>
-                                            <p><input class="mat_elems" id="a21" type="number" name="a21" min="0" max="100" required/></p>
-                                        </mtd>
+        {{ if .Done }}
+            <h2>Input matrix:</h2>
+            <mtable>
+                <mtr>
+                    <mtd class="out_mtd">{{.El11}}</mtd>
+                    <mtd class="out_mtd">{{.El12}}</mtd>
+                </mtr>
+                <mtr>
+                    <mtd class="out_mtd">{{.El21}}</mtd>
+                    <mtd class="out_mtd">{{.El22}}</mtd>
+                </mtr>
+            </mtable>
+            <h2>Determinant of this matrix</h2>
+            <div id="out_det">
+                <p class="det">=</p>
+                <p class="det">{{.Determinant}}</p>
+            </div>
+        {{ else }}
+            <!--<h2 id="det">Here you will se determinant</h2>-->
+        {{end}}
 
-                                        <mtd>
-                                            <p><input class="mat_elems" id="a22" type="number" name="a22" min="0" max="100" required/></p>
-                                        </mtd>
-                                    </div>
-                                </mtr>
-                            </mtable>
-                        </div>
-
-                        <div id="input_button">
-                            <input id="calc"  type="submit" value="Calculate"/>
-                        </div>
-                    </div>
-                </form>
-
-                <div id="det_container">
-                    {{ if .Done }}
-
-                    <div>
-                    <h2>Input matrix:</h2>
-                        <mtable>
-                            <div class="mat_columns">
-                                <div class="rows">
-                                    <mtr>
-                                        <mtd class="out_mtd"><p>{{.El11}}</p></mtd>
-                                        <mtd class="out_mtd"><p>{{.El12}}</p></mtd>
-                                    </mtr>
-                                </div>
-                                <div class="rows">
-                                    <mtr>
-                                        <mtd class="out_mtd"><p>{{.El21}}</p></mtd>
-                                        <mtd class="out_mtd"><p>{{.El22}}</p></mtd>
-                                    </mtr>
-                                </div>
-                            </div>
-                        </mtable>
-                    </div>
-
-                    <div>
-                        <h2>Determinant of this matrix = </h2>
-                        <h3 id="det1">{{.Determinant}}</h3>
-                    </div>
-                    {{ else }}
-                    <h2 id="det">Here you will se determinant</h2>
-                    {{end}}
-                </div>
-            </main>
-        </div>
-
-        <div><footer></footer></div>
-    </div>
+    </main>
 </body>
 </html>
