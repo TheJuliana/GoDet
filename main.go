@@ -11,38 +11,11 @@ import (
 	"unsafe"
 )
 
+//Подключаем dll и импортируем функции
 var mod = syscall.NewLazyDLL("libmylib.dll")
 var add = mod.NewProc("Addiction")
 var inc = mod.NewProc("AddToMas")
 var det = mod.NewProc("Determinant")
-
-func sumHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("dll: ", mod.Name)
-	ret, _, err := add.Call(3, 4)
-	if err != nil {
-		fmt.Fprintf(w, "<a href='/'>Sum: %d</a>", ret)
-	}
-}
-func aboutHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("dll: ", mod.Name)
-	var numbers [3]int32 = [3]int32{2, 34, 4}
-	ret, _, err := inc.Call(uintptr(unsafe.Pointer(&numbers)), 3)
-	if err != nil {
-		fmt.Fprintf(w, "<a href='/'>Sums: %d</a>", ret)
-	}
-}
-func infoHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("dll: ", mod.Name)
-	var numbers = [4]int32{2, 2, 48, 5}
-	ret, _, err := det.Call(uintptr(unsafe.Pointer(&numbers)), 4)
-	if err != nil {
-		fmt.Fprintf(w, "<a> a11 = %d</a>", numbers[0])
-		fmt.Fprintf(w, "<a> a12 = %d</a>", numbers[1])
-		fmt.Fprintf(w, "<a> a21 = %d</a>", numbers[2])
-		fmt.Fprintf(w, "<a> a22 = %d</a>", numbers[3])
-		fmt.Fprintf(w, "<a>Determinant:  %d</a>", ret)
-	}
-}
 
 type Matrix2 struct {
 	a11 int32
@@ -51,6 +24,7 @@ type Matrix2 struct {
 	a22 int32
 }
 
+//данные для передачи на matrix2_page.html
 type Page1 struct {
 	Determinant uintptr
 	Done        bool
@@ -70,6 +44,8 @@ type Matrix3 struct {
 	a32 int32
 	a33 int32
 }
+
+//данные для передачи на matrix3_page.html
 type Page2 struct {
 	Determinant uintptr
 	Done        bool
@@ -101,12 +77,15 @@ func matrixHandler2(w http.ResponseWriter, r *http.Request) {
 		int32(a21),
 		int32(a22),
 	}
+
+	//вывод для проверки
 	fmt.Println("a11 = ", mat.a11)
 	fmt.Println("a12 = ", mat.a12)
 	fmt.Println("a21 = ", mat.a21)
 	fmt.Println("a22 = ", mat.a22)
 	fmt.Println(mat)
 	var numbers = [4]int32{mat.a11, mat.a12, mat.a21, mat.a22}
+	//ret имеет тип uinptr поэтому возникает проблема с отрицательными числами
 	ret, _, err := det.Call(uintptr(unsafe.Pointer(&numbers)), 4)
 	d := Page1{ret, true, numbers[0], numbers[1], numbers[2], numbers[3]}
 
@@ -123,7 +102,9 @@ func matrixHandler3(w http.ResponseWriter, r *http.Request) {
 		tmpl.Execute(w, nil)
 		return
 	}
+	//собираем данные с формы
 	r.ParseForm()
+
 	a11, _ := strconv.ParseInt(r.FormValue("a11"), 10, 32)
 	a12, _ := strconv.ParseInt(r.FormValue("a12"), 10, 32)
 	a13, _ := strconv.ParseInt(r.FormValue("a13"), 10, 32)
@@ -133,6 +114,7 @@ func matrixHandler3(w http.ResponseWriter, r *http.Request) {
 	a31, _ := strconv.ParseInt(r.FormValue("a31"), 10, 32)
 	a32, _ := strconv.ParseInt(r.FormValue("a32"), 10, 32)
 	a33, _ := strconv.ParseInt(r.FormValue("a33"), 10, 32)
+
 	mat := Matrix3{
 		int32(a11),
 		int32(a12),
@@ -144,20 +126,18 @@ func matrixHandler3(w http.ResponseWriter, r *http.Request) {
 		int32(a32),
 		int32(a33),
 	}
-	fmt.Println("333333")
-	fmt.Println("a11 = ", mat.a11)
-	fmt.Println("a12 = ", mat.a12)
-	fmt.Println("a13 = ", mat.a13)
-	fmt.Println("a21 = ", mat.a21)
-	fmt.Println("a22 = ", mat.a22)
-	fmt.Println("a23 = ", mat.a23)
+
 	fmt.Println(mat)
 	var numbers = [9]int32{
 		mat.a11, mat.a12, mat.a13,
 		mat.a21, mat.a22, mat.a23,
 		mat.a31, mat.a32, mat.a33,
 	}
+
+	//вызываем функцию из dll
 	ret, _, err := det.Call(uintptr(unsafe.Pointer(&numbers)), 9)
+
+	//передаем обратно данные для отображения пользователю
 	d := Page2{ret,
 		true,
 		numbers[0],
@@ -174,23 +154,29 @@ func matrixHandler3(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Println("DETERMINANT= ", ret)
 	}
-	http.Redirect(w, r, "/matrix3", http.StatusFound)
+
 }
+
+//w - поток ответа, r - информация о запросе
 func mainHandler(w http.ResponseWriter, r *http.Request) {
+	//поулчаем html страничку
 	tmpl, _ := template.ParseFiles("pages/main_page.html")
+	//get - метод чтения данных с сайта, post - метод для отправки данных на сайт
 	if r.Method != http.MethodPost {
 		tmpl.Execute(w, nil)
 		return
 	}
 }
 func main() {
+	//Подгрузка CSS
 	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
+
+	//маршрутизация, первый параметр - маршрут, второй - функция, которая будет обрабатывать запросы
 	http.HandleFunc("/matrix2", matrixHandler2)
 	http.HandleFunc("/matrix3", matrixHandler3)
 	http.HandleFunc("/", mainHandler)
-	/*http.HandleFunc("/about", aboutHandler)
-	http.HandleFunc("/main", mainHandler)
-	http.HandleFunc("/info", infoHandler)*/
+
+	//прослушиватель запросов
 	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
