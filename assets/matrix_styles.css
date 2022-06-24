@@ -1,0 +1,82 @@
+html {
+    background-color: black;
+    color: white;
+}
+
+.main_header {
+
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: center;
+}
+
+.table {
+    border: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /*убираем стрелочки*/
+    -webkit-appearance: none;
+
+}
+#det_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: center;
+}
+#form_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: center;
+}
+
+#input_button {
+    flex-grow: 1;
+    flex-basis: 50%;
+}
+.mat_columns {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.rows {
+    flex-direction: row;
+    justify-content: center;
+}
+.row {
+    display: flex;
+    justify-content: space-evenly;
+}
+.subrows {
+    display: flex;
+    justify-content: center;
+}
+
+.el {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+#calc {
+    flex-grow: 1;
+    flex-basis: 50%;
+}
+.mat_elems {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+

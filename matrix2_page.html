@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Matrix 2x2</title>
-    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/matrix_styles.css">
 </head>
 <body>
     <div class="main">
@@ -16,50 +16,64 @@
 
         <div>
             <main>
-                <div id="form_container">
-                    <form id="mat" action="/" method="post">
-                        <mtable class="table" frame="solid">
-                            <div id="col1" class="columns">
-                                <mtr>
-                                    <mtd>
-                                        <input class="mat_elems" id="a11" type="number" name="a11" min="0" max="100" required />
-                                    </mtd>
-                                    <mtd>
-                                        <input class="mat_elems" id="a12" type="number" name="a12" min="0" max="100" required/>
-                                    </mtd>
-                                </mtr>
-                            </div>
-                            <div id="col2" class="columns">
-                                <mtr>
-                                    <mtd>
-                                        <input class="mat_elems" id="a21" type="number" name="a21" min="0" max="100" required/>
-                                    </mtd>
-                                    <mtd>
-                                        <input class="mat_elems" id="a22" type="number" name="a22" min="0" max="100" required/>
-                                    </mtd>
-                                </mtr>
-                            </div>
-                        </mtable>
-                        <p><input id="calc"  type="submit" value="Calculate"/></p>
-                    </form>
+                <div>
+                    <a href="http://localhost:8080"><input type="button" value="Back"></a>
                 </div>
+                <form id="mat" action="/matrix2" method="post">
+                    <div id="form_container">
+                        <div>
+                            <mtable class="table" frame="solid">
+                                <mtr class="rows">
+                                    <div class="row">
+                                        <mtd>
+                                            <p><input class="mat_elems" id="a11" type="number" name="a11" min="0" max="100" required /></p>
+                                        </mtd>
+
+                                        <mtd>
+                                            <p><input class="mat_elems" id="a12" type="number" name="a12" min="0" max="100" required/></p>
+                                        </mtd>
+                                    </div>
+                                </mtr>
+
+                                <mtr class="rows">
+                                    <div class="row">
+                                        <mtd>
+                                            <p><input class="mat_elems" id="a21" type="number" name="a21" min="0" max="100" required/></p>
+                                        </mtd>
+
+                                        <mtd>
+                                            <p><input class="mat_elems" id="a22" type="number" name="a22" min="0" max="100" required/></p>
+                                        </mtd>
+                                    </div>
+                                </mtr>
+                            </mtable>
+                        </div>
+
+                        <div id="input_button">
+                            <input id="calc"  type="submit" value="Calculate"/>
+                        </div>
+                    </div>
+                </form>
+
                 <div id="det_container">
                     {{ if .Done }}
 
                     <div>
                     <h2>Input matrix:</h2>
                         <mtable>
-                            <div class="columns">
-                                <mtr>
-                                    <mtd class="out_mtd"><p>{{.El11}}</p></mtd>
-                                    <mtd class="out_mtd"><p>{{.El12}}</p></mtd>
-                                </mtr>
-                            </div>
-                            <div class="columns">
-                                <mtr>
-                                    <mtd class="out_mtd"><p>{{.El21}}</p></mtd>
-                                    <mtd class="out_mtd"><p>{{.El22}}</p></mtd>
-                                </mtr>
+                            <div class="mat_columns">
+                                <div class="rows">
+                                    <mtr>
+                                        <mtd class="out_mtd"><p>{{.El11}}</p></mtd>
+                                        <mtd class="out_mtd"><p>{{.El12}}</p></mtd>
+                                    </mtr>
+                                </div>
+                                <div class="rows">
+                                    <mtr>
+                                        <mtd class="out_mtd"><p>{{.El21}}</p></mtd>
+                                        <mtd class="out_mtd"><p>{{.El22}}</p></mtd>
+                                    </mtr>
+                                </div>
                             </div>
                         </mtable>
                     </div>
