@@ -7,7 +7,6 @@ import (
 	"log"
 	"net/http"
 	"strconv"
-	"strings"
 	"syscall"
 	"unsafe"
 )
@@ -55,6 +54,10 @@ type Matrix struct {
 type Page struct {
 	Determinant uintptr
 	Done        bool
+	El11        int32
+	El12        int32
+	El21        int32
+	El22        int32
 }
 
 func matrixHandler2(w http.ResponseWriter, r *http.Request) {
@@ -81,37 +84,10 @@ func matrixHandler2(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(mat)
 	var numbers = [4]int32{mat.a11, mat.a12, mat.a21, mat.a22}
 	ret, _, err := det.Call(uintptr(unsafe.Pointer(&numbers)), 4)
-	d := Page{ret, true}
+	d := Page{ret, true, numbers[0], numbers[1], numbers[2], numbers[3]}
 	tmpl.Execute(w, d)
 	if err != nil {
 		fmt.Println("DETERMINANT= ", ret)
-	}
-}
-
-func getDet(w http.ResponseWriter, r *http.Request) {
-	r.ParseForm() //Parse url parameters passed, then parse the response packet for the POST body (request body)
-	// attention: If you do not call ParseForm method, the following data can not be obtained form
-	fmt.Println(r.Form) // print information on server side.
-	fmt.Println("path", r.URL.Path)
-	fmt.Println("scheme", r.URL.Scheme)
-	fmt.Println(r.Form["url_long"])
-	for k, v := range r.Form {
-		fmt.Println("key:", k)
-		fmt.Println("val:", strings.Join(v, ""))
-	}
-	fmt.Fprintf(w, "Hello astaxie!") // write data to response
-}
-
-func matrixHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("method:", r.Method) //get request method
-	if r.Method == "GET" {
-		t, _ := template.ParseFiles("matrix2_page.html")
-		t.Execute(w, nil)
-	} else {
-		r.ParseForm()
-		// logic part of log in
-		fmt.Println("a12:", r.Form["a12"])
-		fmt.Println("a22:", r.Form["a22"])
 	}
 }
 
