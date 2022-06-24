@@ -85,7 +85,7 @@ type Page2 struct {
 }
 
 func matrixHandler2(w http.ResponseWriter, r *http.Request) {
-	tmpl, _ := template.ParseFiles("matrix2_page.html")
+	tmpl, _ := template.ParseFiles("pages/matrix2_page.html")
 	if r.Method != http.MethodPost {
 		tmpl.Execute(w, nil)
 		return
@@ -118,7 +118,7 @@ func matrixHandler2(w http.ResponseWriter, r *http.Request) {
 }
 
 func matrixHandler3(w http.ResponseWriter, r *http.Request) {
-	tmpl, _ := template.ParseFiles("matrix3_page.html")
+	tmpl, _ := template.ParseFiles("pages/matrix3_page.html")
 	if r.Method != http.MethodPost {
 		tmpl.Execute(w, nil)
 		return
@@ -177,7 +177,7 @@ func matrixHandler3(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/matrix3", http.StatusFound)
 }
 func mainHandler(w http.ResponseWriter, r *http.Request) {
-	tmpl, _ := template.ParseFiles("main_page.html")
+	tmpl, _ := template.ParseFiles("pages/main_page.html")
 	if r.Method != http.MethodPost {
 		tmpl.Execute(w, nil)
 		return
