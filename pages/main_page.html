@@ -3,14 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>GoDet</title>
-    <link rel="stylesheet" href="../assets/matrix_styles.css">
+    <link rel="stylesheet" href="../assets/main_styles.css">
 </head>
 <body>
-    <h1>GoDet</h1>
-<h2>small webpage</h2>
-    <a href="http://localhost:8080/matrix2"><input type="button" value="Matrix 2x2"></a>
-    <a href="http://localhost:8080/matrix3"><input type="button" value="Matrix 3x3"></a>
-
-    <img src="https://images.squarespace-cdn.com/content/v1/5e10bdc20efb8f0d169f85f9/1590751925678-5XVSVXMC2BX38RNKKO19/music.png" alt="">
+    <main>
+        <div id="left_sector">
+            <div id="text_sector">
+                <h1>GoDet</h1>
+                <h2>Welcome! You can get the determinant of a matrix by choosing its dimension below</h2>
+            </div>
+            <div id="buttons">
+                <a href="http://localhost:8080/matrix2"><input type="button" class="buttons" value="Matrix 2x2"></a>
+                <a href="http://localhost:8080/matrix3"><input type="button" class="buttons" value="Matrix 3x3"></a>
+            </div>
+        </div>
+        <div id="right_sector">
+        <img id="go_img" src="https://images.squarespace-cdn.com/content/v1/5e10bdc20efb8f0d169f85f9/1590751925678-5XVSVXMC2BX38RNKKO19/music.png" alt="">
+        </div>
+    </main>
 </body>
 </html>
