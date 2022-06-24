@@ -3,10 +3,6 @@
 # GoDet
 Экзаменационная работа по основам программирования за второй семестр.
 
----
-
-Exam work on the basics of programming for the second semester.
-
 ## Описание
 Мне было интересно для чего может потребоваться Web-интерфейс для программы, написанной на C++.
 Так как на занятиях мы делали математическую библиотеку, связанную с матричными операциями, я подумала, что было бы интересно сделать
@@ -15,16 +11,6 @@ Exam work on the basics of programming for the second semester.
 Идея была в том, что C++ - самый быстрый из современных компилируемых языков и он отлично подходит для вычислений, 
 а GoLang - относительно простой и современный язык для написания серверной части программы.
 ![illustration](https://user-images.githubusercontent.com/62110361/175657637-c6d45cd6-de1b-4d8f-aced-591352019434.png)
-
----
-
-## About
-I was wondering why a Web interface might be needed for a program written in C++.
-Since in the classroom we were making a mathematical library related to matrix operations, I thought it would be interesting to do
-a simple C++ library that would calculate the determinant of a matrix received from a user through a web page.
-The link between the frontend area and the library was the GoLang language.
-The idea was that C++ is the fastest of today's compiled languages ​​and is great for computing,
-and GoLang is a relatively simple and modern language for writing a server-side program.
 
 ## Ход работы
 Для начала, имеющуюся функцию вычисления определителя, мне необходимо было упаковать в библиотеку, чтобы ее можно было поключить к Go.
@@ -36,7 +22,24 @@ and GoLang is a relatively simple and modern language for writing a server-side 
 В итоге я решила не начинать другой проект, а написать простую функцию на C++ не импортируя дополнительные и даже стандартную std библиотеки.
 На всем пути выполнения данной работы я сталкивалась с другими ошибками, которые, к счастью, не оказались нерешаемыми.
   
+## Итог
+> Неудачный результат - тоже результат
+
+Выполнить хорошо данную работу на моем текущем уровне знаний не представлялось возможным.
+Но, несмотря на сложившуюся ситуацию с языком C++, я узнала много нового из части backend разработки, освежила знания HTML и CSS.
+  
 ---
+  
+# GoDet
+Exam work on the basics of programming for the second semester.
+  
+## About
+I was wondering why a Web interface might be needed for a program written in C++.
+Since in the classroom we were making a mathematical library related to matrix operations, I thought it would be interesting to do
+a simple C++ library that would calculate the determinant of a matrix received from a user through a web page.
+The link between the frontend area and the library was the GoLang language.
+The idea was that C++ is the fastest of today's compiled languages and is great for computing,
+and GoLang is a relatively simple and modern language for writing a server-side program.
   
 ## Working Process
 To begin with, I needed to pack the existing function for calculating the determinant into a library so that it could be connected to Go.
@@ -47,14 +50,6 @@ Despite the large amount of time spent looking for a solution, I did not achieve
 This crossed out all the advantages of creating a library, but I felt sorry for the time spent, and I was also interested in learning GoLang and, in general, the entire backend part.
 In the end, I decided not to start another project, but to write a simple function in C ++ without importing additional and even standard std libraries.
 Throughout the course of this work, I encountered other errors, which, fortunately, did not turn out to be unsolvable.
-  
-## Итог
-> Неудачный результат - тоже результат
-
-Выполнить хорошо данную работу на моем текущем уровне знаний не представлялось возможным.
-Но, несмотря на сложившуюся ситуацию с языком C++, я узнала много нового из части backend разработки, освежила знания HTML и CSS.
-  
----
   
 ## Result
 > An unsuccessful result is also a result
