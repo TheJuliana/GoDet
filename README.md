@@ -20,7 +20,8 @@
 Несмотря на большое количество затраченного времени на поиски решения, желаемого результата я так и не добилась.
 Это перечеркнуло все плюсы создания библиотеки, но мне стало жаль потраченного времени а также мне было интересно изучить GoLang и в целом всю backend часть.
 В итоге я решила не начинать другой проект, а написать простую функцию на C++ не импортируя дополнительные и даже стандартную std библиотеки.
-На всем пути выполнения данной работы я сталкивалась с другими ошибками, которые, к счастью, не оказались нерешаемыми.
+На всем пути выполнения данной работы я сталкивалась с другими ошибками, которые, к счастью, не оказались нерешаемыми, кроме еще одной - связанные функции
+из библиотеки используют тип uintptr - числа без знака. Здесь возникает проблема с отрицательными числами и определителем матрицы.
   
 ## Итог
 > Неудачный результат - тоже результат
@@ -49,7 +50,8 @@ I was unable to connect the existing mathematical library with matrices, since G
 Despite the large amount of time spent looking for a solution, I did not achieve the desired result.
 This crossed out all the advantages of creating a library, but I felt sorry for the time spent, and I was also interested in learning GoLang and, in general, the entire backend part.
 In the end, I decided not to start another project, but to write a simple function in C ++ without importing additional and even standard std libraries.
-Throughout the course of this work, I encountered other errors, which, fortunately, did not turn out to be unsolvable.
+Throughout this work, I encountered other errors that, fortunately, did not turn out to be unsolvable, with the exception of one more - related functions
+from the library, use the uintptr type - unsigned numbers. There is a problem here with negative numbers and matrix determinant.
   
 ## Result
 > An unsuccessful result is also a result
